@@ -2,34 +2,34 @@
 //
 // Developer: Geert Wille
 // Merged assets generation for Android, windows phone and iOS devices
-// Assumes pixel count in Sketch is xhdpi, so 1dp=2px
 
 // Parameters
 var options = ['Android/iOS', 'Android/iOS/WP', 'iOS', 'Android', 'WP', 'Web']
 
 var iosFactors = [
-    ["", 0.5, ""],
-    ["", 1, "@2x"]
+    ["", 1, ""],
+    ["", 2, "@2x"],
+    ["", 3, "@3x"]
 ];
 
 var androidFactors = [
-    ["drawable-mdpi", 0.5, ""],
-    ["drawable-hdpi", 0.75, ""],
-    ["drawable-xhdpi", 1, ""],
-    ["drawable-xxhdpi", 1.5, ""],
-    ["drawable-xxxhdpi", 2, ""]
+    ["drawable-mdpi", 1, ""],
+    ["drawable-hdpi", 1.5, ""],
+    ["drawable-xhdpi", 2, ""],
+    ["drawable-xxhdpi", 3, ""],
+    ["drawable-xxxhdpi", 4, ""]
 ];
 
 var windowsFactors = [
-    ["WVGA", 1, ""],
-    ["WXGA", 1.6, ""],
-    ["720p", 1.5, ""],
-    ["1080p", 1.5, ""]
+    ["WVGA", 2, ""],
+    ["WXGA", 3.2, ""],
+    ["720p", 3, ""],
+    ["1080p", 3, ""]
 ];
 
 var webFactors = [
-    ["", 0.5, ""],
-    ["", 1, "@2x"]
+    ["", 1, ""],
+    ["", 2, "@2x"]
 ];
 
 var factors = {
