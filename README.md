@@ -25,7 +25,7 @@ directory, you'll find the plugin functions under the Plugins menu in Sketch.
 
 ## Assumptions
 
-The plugin assumes you design your layouts in xhdpi, which means 2px = 1dp
+The plugin assumes you design your layouts in mdpi, which means 1px = 1dp
 
 
 ## Credits
