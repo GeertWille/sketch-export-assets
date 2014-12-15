@@ -48,7 +48,7 @@ library.sandbox = {
     },
     // each-like iterator for Obj-C types
     forEachObj: function(array, callback) {
-        var count = [array length];
+        var count = [array count];
         for (var i = 0; i < count; i++){
             var el = [array objectAtIndex: i];
             callback(el);
@@ -182,8 +182,7 @@ function processSlice(slice, doc, baseDir, type) {
 function copyLayerWithFactor(originalSlice, factor) {
     var copy = [originalSlice duplicate];
     var frame = [copy frame];
-
-    var rect = [copy rectByAccountingForStyleSize:[[copy absoluteRect] rect]],
+    var rect = [copy absoluteDirtyRect]
     slice = [MSExportRequest requestWithRect:rect scale:factor];
     [copy removeFromParent];
 
