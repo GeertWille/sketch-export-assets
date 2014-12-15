@@ -1,6 +1,6 @@
 # sketch-export-assets
 
-Export assets for Android, iOS, Windows Phone and the Web in Sketch.
+Export assets for Android, iOS, Windows Phone in Sketch.
 
 ## Installation
 
@@ -11,8 +11,8 @@ repository into your Sketch plugins directory and you're good to go.
 The actual location of your Sketch plugins directory will vary,
 however, depending on how you installed Sketch:
 
-* For Sketch 2, use the `~/Library/Application Support/sketch/Plugins`
-  folder.
+* Sketch 2: not supported anymore
+
 * If you bought Sketch 3 from the App Store, use the
   `~/Library/Containers/com.bohemiancoding.sketch3/Data/Library/Application Support/sketch/Plugins`
   directory
@@ -26,6 +26,12 @@ directory, you'll find the plugin functions under the Plugins menu in Sketch.
 ## Assumptions
 
 The plugin assumes you design your layouts in mdpi, which means 1px = 1dp
+
+## Shortcuts
+
+iOS Export: ctrl+alt+shift+1
+Android Export: ctrl+alt+shift+2
+Windows Export: ctrl+alt+shift+3
 
 
 ## Credits
