@@ -29,9 +29,9 @@ The plugin assumes you design your layouts in mdpi, which means 1px = 1dp
 
 ## Shortcuts
 
-iOS Export: ctrl+alt+shift+1
-Android Export: ctrl+alt+shift+2
-Windows Export: ctrl+alt+shift+3
+* iOS Export: ctrl + alt + shift + 1
+* Android Export: ctrl + alt + shift + 2
+* Windows Export: ctrl + alt + shift + 3
 
 
 ## Credits
