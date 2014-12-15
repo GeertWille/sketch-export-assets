@@ -87,8 +87,6 @@ com.geertwille = {
         }
     },
 
-
-
     processSlice: function(slice) {
         var frame = [slice frame];
         var sliceName = [slice name];
