@@ -5,6 +5,7 @@ com.geertwille = {
     type: '',
     baseDir: '',
     factors: {},
+    layerVisibility: [],
 
     export: function(type, factors) {
         this.type = type;
@@ -22,37 +23,53 @@ com.geertwille = {
             return;
         }
 
-        //process the selected slices
-        var slicesToOutput = selection;
+        // If nothing is selected tell the user so
+        if ([selection count] == 0) {
+            this.alert("No layer(s) selected");
+        }
 
-        // Loop over all slices to export
-        var count = [slicesToOutput count];
-        for (var i = 0; i < count; i++) {
-            var slice = [slicesToOutput objectAtIndex: i];
-            this.processSlice(slice);
+        // process the selected slices
+        // var slicesToOutput = selection;
+
+        // Hide all layers except the ones we are slicing
+        for (var i = 0; i < [selection count]; i++) {
+            var layer = [selection objectAtIndex:i];
+            // Make sure we don't get errors if no artboard exists.
+            // currentPage inerits from MSLayerGroup so it's basicly the same as an artboard
+            var artboard = [layer parentArtboard] ? [layer parentArtboard] : [doc currentPage];
+            this.layerVisibility = [];
+
+            [artboard deselectAllLayers];
+
+            var layerArray = [layer];
+            [artboard selectLayers:layerArray];
+
+            var root = artboard;
+
+            this.hideLayers(root, layer);
+
+            // Process the slice
+            this.processSlice(layer);
+
+            // Restore layers visibility
+            for (var m = 0; m < this.layerVisibility.length; m++) {
+                var dict = this.layerVisibility[m];
+                var layer = [dict objectForKey:"layer"];
+                var visibility = [dict objectForKey:"visible"];
+
+                if (visibility == 0) {
+                    [layer setIsVisible:false];
+                } else {
+                    [layer setIsVisible:true];
+                }
+            }
+
+            // Restore selection
+            [artboard selectLayers:selection];
         }
 
         // Open finder window with assets exported
         library.sandbox.openInFinder(this.baseDir + "/assets");
-    },
-
-    createSelect: function(msg, items, selectedItemIndex){
-        selectedItemIndex = selectedItemIndex || 0
-
-        var accessory = [[NSComboBox alloc] initWithFrame:NSMakeRect(0, 0, 200, 25)]
-        [accessory addItemsWithObjectValues:items]
-        [accessory selectItemAtIndex:selectedItemIndex]
-
-        var alert = [[NSAlert alloc] init]
-        [alert setMessageText:msg]
-        [alert addButtonWithTitle:'OK']
-        [alert addButtonWithTitle:'Cancel']
-        [alert setAccessoryView:accessory]
-
-        var responseCode = [alert runModal]
-        var sel = [accessory indexOfSelectedItem]
-
-        return [responseCode, sel]
     },
 
     alert: function(msg) {
@@ -107,10 +124,31 @@ com.geertwille = {
     copyLayerWithFactor: function(originalSlice, factor) {
         var copy = [originalSlice duplicate];
         var frame = [copy frame];
-        var rect = [copy absoluteDirtyRect]
+        var rect = [[copy absoluteRect] rect];
         slice = [MSExportRequest requestWithRect:rect scale:factor];
         [copy removeFromParent];
 
         return slice;
+    },
+
+    // I used this code from https://github.com/nickstamas/Sketch-Better-Android-Export
+    // and has been written by Nick Stamas
+    // Cheers to him :)
+    // Addapted it a bit for my plugin
+    hideLayers: function(root, target) {
+        // Hide all layers except for selected and store visibility
+        for (var k = 0; k < [[root layers] count]; k++) {
+            var currentLayer = [[root layers] objectAtIndex:k];
+            if ([currentLayer containsSelectedItem] && currentLayer != target) {
+                this.hideLayers(currentLayer, target);
+            } else if (!(currentLayer == target)) {
+                var dict = [[NSMutableDictionary alloc] init];
+                [dict addObject:currentLayer forKey:"layer"];
+                [dict addObject:[currentLayer isVisible] forKey:"visible"];
+
+                this.layerVisibility.push(dict);
+                [currentLayer setIsVisible: false];
+            }
+        }
     }
 }
