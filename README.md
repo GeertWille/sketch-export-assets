@@ -18,7 +18,7 @@ however, depending on how you installed Sketch:
 * Sketch 2: not supported anymore
 
 * If you bought Sketch 3 from the App Store, use the
-  `~/Library/Containers/com.bohemiancoding.sketch3/Data/Library/Application Support/sketch/Plugins`
+  ` ~/Library/Containers/com.bohemiancoding.sketch3/Data/Library/Application Support/com.bohemiancoding.sketch3/Plugins`
   directory
 * If you downloaded Sketch 3 from the Bohemian Coding site, use the
   `~/Library/Application Support/com.bohemiancoding.sketch3/Plugins`
