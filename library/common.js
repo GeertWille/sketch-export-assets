@@ -10,15 +10,9 @@ com.geertwille = {
     export: function(type, factors) {
         this.type = type;
         this.factors = factors;
-        this.baseDir = this.getCwd();
+        this.baseDir = this.getDirFromPrompt();
 
-        var fileUrl = [doc fileURL];
-        if (fileUrl == null) {
-            this.alert("You need to save your document for me to know where to save it");
-            return;
-        }
-
-        if (this.getDirFromPrompt() == null) {
+        if (this.baseDir == null) {
             this.alert("Not saving any assets");
             return;
         }
@@ -26,10 +20,8 @@ com.geertwille = {
         // If nothing is selected tell the user so
         if ([selection count] == 0) {
             this.alert("No layer(s) selected");
+            return;
         }
-
-        // process the selected slices
-        // var slicesToOutput = selection;
 
         // Hide all layers except the ones we are slicing
         for (var i = 0; i < [selection count]; i++) {
@@ -75,16 +67,6 @@ com.geertwille = {
     alert: function(msg) {
         var app = [NSApplication sharedApplication];
         [app displayDialog:msg];
-    },
-
-    // Return current working directory
-    // This works better for the designer's workflow, as they mostly want to
-    // save assets in the current directory
-    getCwd: function() {
-        var fileUrl = [doc fileURL],
-        filePath = [fileUrl path],
-        baseDir = filePath.split([doc displayName])[0];
-        return baseDir;
     },
 
     // Let the user specify a directory
