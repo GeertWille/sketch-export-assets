@@ -88,16 +88,17 @@ com.geertwille = {
 
     processSlice: function(slice) {
         var frame = [slice frame];
-        var sliceName = [slice name];
+        var sliceName = [slice name].toLowerCase().replace(/\s/,'_').replace(/-/g,'_').replace(/[^0-9a-z_]/,'');
 
         for (var i = 0; i < factors.length; i++) {
             var name   = this.factors[i].folder;
             var factor = this.factors[i].scale;
+            var prefix = this.factors[i].prefix;
             var suffix = this.factors[i].suffix;
 
             log("Processing " + this.type + " slices: " + sliceName + " " + name + " (" + factor + ")");
             var version = this.copyLayerWithFactor(slice, factor);
-            var fileName = this.baseDir + "/assets/" + this.type + "/" + name + "/" + sliceName + suffix + ".png";
+            var fileName = this.baseDir + "/assets/" + this.type + "/" + name + "/" + prefix+ sliceName + suffix + ".png";
             [doc saveArtboardOrSlice: version toFile:fileName];
             log("Saved " + fileName);
         }
