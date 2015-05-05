@@ -88,8 +88,10 @@ com.geertwille = {
 
     processSlice: function(slice) {
         var frame = [slice frame];
-        var sliceName = [slice name].toLowerCase().replace(/\s/,'_').replace(/-/g,'_').replace(/[^0-9a-z_]/,'');
-
+        var sliceName = [slice name];
+        if (this.type=="android") {
+        	sliceName = sliceName.toLowerCase().replace(/\s/,'_').replace(/-/g,'_').replace(/[^0-9a-z_]/,'');
+        }
         for (var i = 0; i < factors.length; i++) {
             var name   = this.factors[i].folder;
             var factor = this.factors[i].scale;
