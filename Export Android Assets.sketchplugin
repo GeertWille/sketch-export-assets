@@ -4,39 +4,30 @@
 // Merged assets generation for Android, windows phone and iOS devices
 #import 'library/common.js'
 
-var prefix = [doc askForUserInput:"Enter a prefix (like launcher, menu, dialog, etc):" initialValue:""];
-if (prefix!="") {
-	prefix += "_";
-}
 var factors = [
     {
         folder: 'drawable-mdpi',
         scale: 1.0,
-        prefix: prefix,
         suffix: '',
     },
     {
         folder: 'drawable-hdpi',
         scale: 1.5,
-        prefix: prefix,
         suffix: '',
     },
     {
         folder: 'drawable-xhdpi',
         scale: 2.0,
-        prefix: prefix,
         suffix: '',
     },
     {
         folder: 'drawable-xxhdpi',
         scale: 3.0,
-        prefix: prefix,
         suffix: '',
     },
     {
         folder: 'drawable-xxxhdpi',
         scale: 4.0,
-        prefix: prefix,
         suffix: '',
     },
 ];
