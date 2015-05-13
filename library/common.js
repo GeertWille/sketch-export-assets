@@ -90,12 +90,15 @@ com.geertwille = {
         var frame = [slice frame];
         var sliceName = [slice name];
         if (this.type=="android") {
-        	sliceName = sliceName.toLowerCase().replace(/\s/,'_').replace(/-/g,'_').replace(/[^0-9a-z_]/,'');
+        	sliceName = sliceName.trim().toLowerCase().replace(/\s/,'_').replace(/-+/g,'_').replace(/[^0-9a-z_]/,'');
         }
         for (var i = 0; i < factors.length; i++) {
             var name   = this.factors[i].folder;
             var factor = this.factors[i].scale;
-            var prefix = this.factors[i].prefix;
+            var prefix = "";
+            if (this.type=="android") {
+	            var prefix = this.factors[i].prefix;
+	        }
             var suffix = this.factors[i].suffix;
 
             log("Processing " + this.type + " slices: " + sliceName + " " + name + " (" + factor + ")");
