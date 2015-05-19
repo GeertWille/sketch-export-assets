@@ -2,7 +2,7 @@
 //
 // Developer: Geert Wille
 // Merged assets generation for Android, windows phone and iOS devices
-#import 'library/common.js'
+@import 'library/common.js'
 
 var factors = [
     {

@@ -1,4 +1,4 @@
-#import 'library/sandbox.js'
+@import 'library/sandbox.js'
 
 var com = {};
 com.geertwille = {
@@ -61,7 +61,11 @@ com.geertwille = {
         }
 
         // Open finder window with assets exported
-        library.sandbox.openInFinder(this.baseDir + "/assets");
+        if (this.baseDir.indexOf('/res') > -1 && this.type == "android") {
+            library.sandbox.openInFinder(this.baseDir);
+        } else {
+            library.sandbox.openInFinder(this.baseDir + "/assets");
+        }
     },
 
     alert: function(msg) {
@@ -89,21 +93,28 @@ com.geertwille = {
     processSlice: function(slice) {
         var frame = [slice frame];
         var sliceName = [slice name];
-        if (this.type=="android") {
+        if (this.type == "android") {
         	sliceName = sliceName.trim().toLowerCase().replace(/\s/,'_').replace(/-+/g,'_').replace(/[^0-9a-z_]/,'');
         }
         for (var i = 0; i < factors.length; i++) {
             var name   = this.factors[i].folder;
             var factor = this.factors[i].scale;
             var prefix = "";
-            if (this.type=="android") {
+            if (this.type == "android") {
 	            var prefix = this.factors[i].prefix;
 	        }
             var suffix = this.factors[i].suffix;
 
             log("Processing " + this.type + " slices: " + sliceName + " " + name + " (" + factor + ")");
             var version = this.copyLayerWithFactor(slice, factor);
-            var fileName = this.baseDir + "/assets/" + this.type + "/" + name + "/" + prefix+ sliceName + suffix + ".png";
+
+            // If we place the assets in the res folder don't place it in an assets/android folder
+            if (this.baseDir.indexOf('/res') > -1 && this.type == "android") {
+                var fileName = this.baseDir + "/" + name + "/" + prefix+ sliceName + suffix + ".png";
+            } else {
+                var fileName = this.baseDir + "/assets/" + this.type + "/" + name + "/" + prefix+ sliceName + suffix + ".png";
+            }
+
             [doc saveArtboardOrSlice: version toFile:fileName];
             log("Saved " + fileName);
         }
