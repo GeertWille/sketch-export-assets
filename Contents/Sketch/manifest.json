@@ -3,7 +3,7 @@
     "description": "Plugins to export assets to different platforms",
     "author": "Geert Wille",
     "homepage": "https://github.com/GeertWille/sketch-export-assets",
-    "version": 2.0,
+    "version": 2.1,
     "identifier": "com.geertwille.sketch.export-assets",
     "compatibleVersion": 3,
     "bundleVersion": 1,
