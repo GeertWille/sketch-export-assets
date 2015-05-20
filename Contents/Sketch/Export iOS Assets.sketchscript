@@ -1,0 +1,29 @@
+// Developer: Geert Wille
+// Merged assets generation for Android, windows phone and iOS devices
+@import 'library/common.js'
+
+var document;
+var onRun = function(context) {
+    var selection = context.selection,
+        document = context.document,
+        factors = [
+            {
+                folder: '',
+                scale: 1.0,
+                suffix: '',
+            },
+            {
+                folder: '',
+                scale: 2.0,
+                suffix: '@2x',
+            },
+            {
+                folder: '',
+                scale: 3.0,
+                suffix: '@3x',
+            },
+        ]
+    ;
+
+    com.geertwille.export('ios', factors, document, selection);
+}

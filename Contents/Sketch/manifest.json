@@ -1,0 +1,41 @@
+{
+    "name": "Sketch Export Assets",
+    "description": "Plugins to export assets to different platforms",
+    "author": "Geert Wille",
+    "homepage": "https://github.com/GeertWille/sketch-export-assets",
+    "version": 2.0,
+    "identifier": "com.geertwille.sketch.export-assets",
+    "updateURL": "https://github.com/downloads/example/sketchplugins/sketchplugins.json",
+    "compatibleVersion": 3,
+    "bundleVersion": 1,
+    "commands":
+        [
+            {
+                "name": "Export iOS Assets",
+                "identifier": "export-assets-ios",
+                "shortcut": "ctrl alt shift 1",
+                "script": "Export iOS Assets.sketchscript"
+            },
+            {
+                "name": "Export Android Assets",
+                "identifier": "export-assets-android",
+                "shortcut": "ctrl alt shift 2",
+                "script": "Export Android Assets.sketchscript"
+            },
+            {
+                "name": "Export WindowsPhone Assets",
+                "identifier": "export-assets-wp",
+                "shortcut": "ctrl alt shift 3",
+                "script": "Export WindowsPhone Assets.sketchscript"
+            }
+        ],
+    "menu":
+        {
+            "items":
+            [
+                "export-assets-android",
+                "export-assets-ios",
+                "export-assets-wp"
+            ]
+        }
+}

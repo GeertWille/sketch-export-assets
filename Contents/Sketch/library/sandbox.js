@@ -8,9 +8,9 @@ library.sandbox = {
     // each-like iterator for Obj-C types
     forEachObj: function(array, callback, factors) {
         // var thisArg = (typeof thisArg === "undefined") ? this : thisArg;
-        var count = [array count];
+        var count = array.count();
         for (var i = 0; i < count; i++){
-            var el = [array objectAtIndex: i];
+            var el = array[i];
             callback(el);
         }
     },

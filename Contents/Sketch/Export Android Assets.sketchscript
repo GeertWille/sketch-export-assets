@@ -1,0 +1,49 @@
+// Developer: Geert Wille
+// Merged assets generation for Android, windows phone and iOS devices
+@import 'library/common.js'
+
+var document;
+var onRun = function(context) {
+    var selection = context.selection,
+        document = context.document,
+        prefix = [document askForUserInput:'Enter a prefix (like launcher, menu, dialog, etc):' initialValue:''],
+        factors = [
+            {
+                folder: 'drawable-mdpi',
+                scale: 1.0,
+                prefix: prefix,
+                suffix: '',
+            },
+            {
+                folder: 'drawable-hdpi',
+                scale: 1.5,
+                prefix: prefix,
+                suffix: '',
+            },
+            {
+                folder: 'drawable-xhdpi',
+                scale: 2.0,
+                prefix: prefix,
+                suffix: '',
+            },
+            {
+                folder: 'drawable-xxhdpi',
+                scale: 3.0,
+                prefix: prefix,
+                suffix: '',
+            },
+            {
+                folder: 'drawable-xxxhdpi',
+                scale: 4.0,
+                prefix: prefix,
+                suffix: '',
+            },
+        ]
+    ;
+
+    if (prefix != '') {
+        prefix += '_';
+    }
+
+    com.geertwille.export('android', factors, document, selection);
+}
