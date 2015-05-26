@@ -16,7 +16,7 @@ Run following command after going to the sketch plugins folder:
 
 OR
 
-Create a new directory called `sketch-export-assets.sketchplugin` and place the content of this repository in it
+Create a new directory called `sketch-export-assets.sketchplugin` and place the content of this repository in it.
 
 Once you have checked out the plugin repository into the relevant directory, you'll find the plugin functions under the Plugins menu in Sketch.
 
