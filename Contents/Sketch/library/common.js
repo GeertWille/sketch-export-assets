@@ -134,9 +134,11 @@ com.geertwille = {
     },
 
     copyLayerWithFactor: function(originalSlice, factor) {
-        var copy = [originalSlice duplicate];
-        var frame = [copy frame];
-        var rect = [[copy absoluteRect] rect];
+        var copy  = [originalSlice duplicate],
+            frame = [copy frame],
+            rect  = [copy absoluteInfluenceRect]
+        ;
+
         slice = [MSExportRequest requestWithRect:rect scale:factor];
         [copy removeFromParent];
 
