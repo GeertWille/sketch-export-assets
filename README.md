@@ -8,24 +8,17 @@ Also check [my new sketch plugin] to export assets for iOS directly from Sketch 
 
 ## Installation
 
-The basic procedure is the same regardless of which version of Sketch
-you're running, and how you installed it; simply check out this
-repository into your Sketch plugins directory and you're good to go.
+The actual location of your Sketch plugins directory will vary. To open it just click on the `Reveal Plugins Folder` under the `Plugins` menu in sketch.
 
-The actual location of your Sketch plugins directory will vary,
-however, depending on how you installed Sketch:
+Run following command after going to the sketch plugins folder:
 
-* Sketch 2: not supported anymore
+`git clone git@github.com:GeertWille/sketch-export-assets.git sketch-export-assets.sketchplugin`
 
-* If you bought Sketch 3 from the App Store, use the
-  ` ~/Library/Containers/com.bohemiancoding.sketch3/Data/Library/Application Support/com.bohemiancoding.sketch3/Plugins`
-  directory
-* If you downloaded Sketch 3 from the Bohemian Coding site, use the
-  `~/Library/Application Support/com.bohemiancoding.sketch3/Plugins`
-  directory
+OR
 
-Once you have checked out the plugin repository into the relevant
-directory, you'll find the plugin functions under the Plugins menu in Sketch.
+Create a new directory called `sketch-export-assets.sketchplugin` and place the content of this repository in it.
+
+Once you have checked out the plugin repository into the relevant directory, you'll find the plugin functions under the Plugins menu in Sketch.
 
 ## Assumptions
 
