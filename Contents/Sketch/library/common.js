@@ -119,6 +119,10 @@ com.geertwille = {
 
             version = this.copyLayerWithFactor(slice, factor);
 
+            if (prefix == null) {
+                prefix = ''
+            }
+
             // If we place the assets in the res folder don't place it in an assets/android folder
             if (this.baseDir.indexOf('/res') > -1 && this.type == "android") {
                 fileName = this.baseDir + "/" + name + "/" + prefix + sliceName + suffix + ".png";
