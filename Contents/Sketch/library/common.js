@@ -128,8 +128,7 @@ com.geertwille = {
                 fileName = this.baseDir + "/assets/" + this.type + "/" + name + "/" + prefix+ sliceName + suffix + ".png";
             }
 
-            var document = com.geertwille.document;
-            [document saveArtboardOrSlice: version toFile:fileName];
+            [(com.geertwille.document) saveArtboardOrSlice: version toFile:fileName];
 
             log("Saved " + fileName);
         }
