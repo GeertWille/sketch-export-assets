@@ -42,8 +42,6 @@ com.geertwille = {
 
             var root = artboard;
 
-            this.hideLayers(root, layer);
-
             // Process the slice
             this.processSlice(layer);
 
@@ -117,7 +115,7 @@ com.geertwille = {
 
             log("Processing " + this.type + " slices: " + sliceName + " " + name + " (" + factor + ")");
 
-            version = this.copyLayerWithFactor(slice, factor);
+            version = this.makeSliceAndResizeWithFactor(slice, factor);
 
             if (prefix == null) {
                 prefix = ''
@@ -137,36 +135,24 @@ com.geertwille = {
         }
     },
 
-    copyLayerWithFactor: function(originalSlice, factor) {
-        var copy  = [originalSlice duplicate],
-            frame = [copy frame],
-            rect  = [copy absoluteInfluenceRect]
+    makeSliceAndResizeWithFactor: function(layer, factor) {
+        var loopLayerChildren = [[layer children] objectEnumerator],
+            rect = [MSSliceTrimming trimmedRectForSlice:layer],
+            slice
         ;
 
-        slice = [MSExportRequest requestWithRect:rect scale:factor];
-        [copy removeFromParent];
-
-        return slice;
-    },
-
-    // I used this code from https://github.com/nickstamas/Sketch-Better-Android-Export
-    // and has been written by Nick Stamas
-    // Cheers to him :)
-    // Addapted it a bit for my plugin
-    hideLayers: function(root, target) {
-        // Hide all layers except for selected and store visibility
-        for (var k = 0; k < [[root layers] count]; k++) {
-            var currentLayer = [[root layers] objectAtIndex:k];
-            if ([currentLayer containsSelectedItem] && currentLayer != target) {
-                this.hideLayers(currentLayer, target);
-            } else if (!(currentLayer == target)) {
-                var dict = [[NSMutableDictionary alloc] init];
-                [dict addObject:currentLayer forKey:"layer"];
-                [dict addObject:[currentLayer isVisible] forKey:"visible"];
-
-                this.layerVisibility.push(dict);
-                [currentLayer setIsVisible: false];
+        // Check for MSSliceLayer and overwrite the rect if present
+        while (layerChild = [loopLayerChildren nextObject]) {
+            if ([layerChild class] == 'MSSliceLayer') {
+                rect  = [MSSliceTrimming trimmedRectForSlice:layerChild];
             }
         }
+
+        slice = [MSExportRequest requestWithRect:rect scale:factor];
+        slice.shouldTrim = true;
+        // slice.saveForWeb = true;
+        // slice.compression = 0;
+        slice.includeArtboardBackground = false;
+        return slice;
     }
 }
