@@ -3,7 +3,7 @@
     "description": "Plugins to export assets to different platforms",
     "author": "Geert Wille",
     "homepage": "https://github.com/GeertWille/sketch-export-assets",
-    "version": 2.1,
+    "version": 2.2,
     "identifier": "com.geertwille.sketch.export-assets",
     "compatibleVersion": 3,
     "bundleVersion": 1,
@@ -26,6 +26,12 @@
                 "identifier": "export-assets-wp",
                 "shortcut": "ctrl alt shift 3",
                 "script": "Export WindowsPhone Assets.sketchscript"
+            },
+            {
+                "name": "Change Base Density",
+                "identifier": "change-base-density",
+                "shortcut": "ctrl alt shift 4",
+                "script": "Change Base Density.sketchscript"
             }
         ],
     "menu":
@@ -34,7 +40,8 @@
             [
                 "export-assets-android",
                 "export-assets-ios",
-                "export-assets-wp"
+                "export-assets-wp",
+                "change-base-density"
             ]
         }
 }

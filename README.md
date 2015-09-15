@@ -22,7 +22,9 @@ Once you have checked out the plugin repository into the relevant directory, you
 
 ## Assumptions
 
-The plugin assumes you design your layouts in mdpi, which means 1px = 1dp
+~~The plugin assumes you design your layouts in mdpi, which means 1px = 1dp~~
+
+From now on this is configurable!
 
 ## Shortcuts
 
@@ -32,7 +34,6 @@ The plugin assumes you design your layouts in mdpi, which means 1px = 1dp
 
 ## Adding Padding to slices
 From now on you can manually decide how big you want your exported asset to be. Just include a slicelayer in the group of that asset and it will not use the size of the group but the size of that slicelayer...
-
 
 ## Credits
 This plugin is based on [zmaltalker's] project [sketch-android-assets]. I needed to export my assets to multiple platforms that's why I extended his project to cover other platforms.

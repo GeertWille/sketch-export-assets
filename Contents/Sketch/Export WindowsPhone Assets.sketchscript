@@ -30,5 +30,12 @@ var onRun = function(context) {
         ]
     ;
 
-    com.geertwille.export('windows phone', factors, document, selection);
+    var home_folder = "/Users/" + NSUserName();
+    new AppSandbox().authorize(home_folder, function() {
+        com.geertwille.context = context;
+        com.geertwille.document = document;
+
+        var config = com.geertwille.readConfig();
+        com.geertwille.export('windows phone', factors, document, selection, config['density-scale']);
+    });
 }
