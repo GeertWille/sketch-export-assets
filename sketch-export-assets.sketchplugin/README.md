@@ -12,11 +12,11 @@ The actual location of your Sketch plugins directory will vary. To open it just 
 
 Run following command after going to the sketch plugins folder:
 
-`git clone git@github.com:GeertWille/sketch-export-assets.git sketch-export-assets.sketchplugin`
+`git clone git@github.com:GeertWille/sketch-export-assets.git`
 
 OR
 
-Create a new directory called `sketch-export-assets.sketchplugin` and place the content of this repository in it.
+Use [Sketch Toolbox]
 
 Once you have checked out the plugin repository into the relevant directory, you'll find the plugin functions under the Plugins menu in Sketch.
 
@@ -41,3 +41,4 @@ This plugin is based on [zmaltalker's] project [sketch-android-assets]. I needed
 
 [sketch-android-assets]:https://github.com/zmalltalker/sketch-android-assets
 [zmaltalker's]:https://github.com/zmalltalker
+[Sketch Toolbox]:http://sketchtoolbox.com
