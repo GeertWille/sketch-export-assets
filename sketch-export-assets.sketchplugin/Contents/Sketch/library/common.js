@@ -149,6 +149,7 @@ com.geertwille = {
     makeSliceAndResizeWithFactor: function(layer, factor) {
         var loopLayerChildren = [[layer children] objectEnumerator],
             rect = [MSSliceTrimming trimmedRectForSlice:layer],
+            useSliceLayer = false,
             slice
         ;
 
@@ -156,11 +157,14 @@ com.geertwille = {
         while (layerChild = [loopLayerChildren nextObject]) {
             if ([layerChild class] == 'MSSliceLayer') {
                 rect  = [MSSliceTrimming trimmedRectForSlice:layerChild];
+                useSliceLayer = true;
             }
         }
 
         slice = [MSExportRequest requestWithRect:rect scale:(factor / this.baseDensity)];
-        slice.shouldTrim = true;
+        if (!useSliceLayer) {
+            slice.shouldTrim = true;
+        }
         // slice.saveForWeb = true;
         // slice.compression = 0;
         // slice.includeArtboardBackground = false;
