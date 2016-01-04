@@ -40,14 +40,44 @@ com.geertwille = {
             // Make sure we don't get errors if no artboard exists.
             // currentPage inerits from MSLayerGroup so it's basicly the same as an artboard
             var artboard = layer.parentArtboard() ? layer.parentArtboard() : this.document.currentPage();
+            this.layerVisibility = [];
 
             artboard.deselectAllLayers();
 
             var layerArray = [layer];
             [artboard selectLayers:layerArray];
 
+            var root = artboard;
+            for (var k = 0; k < [[root layers] count]; k++) {
+                var currentLayer = [[root layers] objectAtIndex:k];
+                if ([currentLayer containsSelectedItem] && currentLayer != layer) {
+                    this.hideLayers(currentLayer, layer);
+                } else if (!(currentLayer == layer)) {
+                    var dict = [[NSMutableDictionary alloc] init];
+                    [dict addObject:currentLayer forKey:"layer"];
+                    [dict addObject:[currentLayer isVisible] forKey:"visible"];
+
+                    this.layerVisibility.push(dict);
+                    [currentLayer setIsVisible: false];
+                }
+            }
+
             // Process the slice
             this.processSlice(layer);
+
+            // Restore layers visibility
+            for (var m = 0; m < this.layerVisibility.length; m++) {
+                var dict = this.layerVisibility[m];
+
+                var layer = [dict objectForKey:"layer"];
+                var visibility = [dict objectForKey:"visible"];
+
+                if (visibility == 0) {
+                    [(layer.firstObject()) setIsVisible:false];
+                } else {
+                    [(layer.firstObject()) setIsVisible:true];
+                }
+            }
 
             // Restore selection
             artboard.selectLayers(selection);
