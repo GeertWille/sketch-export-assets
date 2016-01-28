@@ -32,6 +32,12 @@
                 "identifier": "change-base-density",
                 "shortcut": "ctrl alt shift 4",
                 "script": "Change Base Density.sketchscript"
+            },
+            {
+                "name": "Export WindowsPhone 8.1 (WinRT) Assets",
+                "identifier": "export-assets-winrt",
+                "shortcut": "ctrl alt shift 5",
+                "script": "Export WinRT Assets.sketchscript"
             }
         ],
     "menu":
@@ -41,7 +47,8 @@
                 "export-assets-android",
                 "export-assets-ios",
                 "export-assets-wp",
-                "change-base-density"
+                "change-base-density",
+                "export-assets-winrt"
             ]
         }
 }
