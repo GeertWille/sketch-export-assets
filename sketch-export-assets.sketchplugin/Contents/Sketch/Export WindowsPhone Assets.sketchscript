@@ -6,6 +6,17 @@ var document;
 var onRun = function(context) {
     var selection = context.selection,
         document = context.document,
+        config,
+        prefix,
+        factors
+    ;
+
+    var home_folder = "/Users/" + NSUserName();
+    new AppSandbox().authorize(home_folder, function() {
+        com.geertwille.context = context;
+        com.geertwille.document = document;
+        config = com.geertwille.readConfig();
+
         factors = [
             {
                 folder: 'WVGA',
@@ -27,15 +38,8 @@ var onRun = function(context) {
                 scale: 3.0,
                 suffix: '',
             },
-        ]
-    ;
+        ];
 
-    var home_folder = "/Users/" + NSUserName();
-    new AppSandbox().authorize(home_folder, function() {
-        com.geertwille.context = context;
-        com.geertwille.document = document;
-
-        var config = com.geertwille.readConfig();
-        com.geertwille.export('windows phone', factors, document, selection, config['density-scale']);
+        com.geertwille.export('windows phone', factors, document, selection, config);
     });
 }

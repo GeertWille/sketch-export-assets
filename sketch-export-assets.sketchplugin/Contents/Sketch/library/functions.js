@@ -69,6 +69,27 @@ var openInFinder = function(path) {
     [finderTask launch];
 }
 
+var createCheckbox = function(item, flag) {
+    flag = ( flag == false ) ? NSOffState : NSOnState;
+    var checkbox = [[NSButton alloc] initWithFrame: NSMakeRect(0, 0, 300, 25)];
+    [checkbox setButtonType: NSSwitchButton];
+    [checkbox setBezelStyle: 0];
+    [checkbox setTitle: item.name];
+    [checkbox setTag: item.value];
+    [checkbox setState: flag];
+
+    return checkbox;
+}
+
+var createSelect = function(items, selectedItemIndex) {
+    selectedItemIndex = (selectedItemIndex > -1) ? selectedItemIndex : 0;
+    var comboBox = [[NSComboBox alloc] initWithFrame:NSMakeRect(0, 0, 300, 25)];
+    [comboBox addItemsWithObjectValues:items];
+    [comboBox selectItemAtIndex:selectedItemIndex];
+
+    return comboBox;
+}
+
 var helpers = {
     readTextFromFile: readTextFromFile,
     writeTextToFile: writeTextToFile,
@@ -77,5 +98,7 @@ var helpers = {
     createFolderAtPath: createFolderAtPath,
     removeFileOrFolder: removeFileOrFolder,
     readPluginPath: readPluginPath,
-    openInFinder: openInFinder
+    openInFinder: openInFinder,
+    createSelect: createSelect,
+    createCheckbox: createCheckbox
 }

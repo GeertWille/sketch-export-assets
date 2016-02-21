@@ -11,12 +11,12 @@ com.geertwille = {
     document: undefined,
     selection: undefined,
 
-    export: function(type, factors, document, selection, baseDensity) {
+    export: function(type, factors, document, selection, config) {
         this.type = type;
         this.factors = factors;
         this.document = document;
         this.selection = selection;
-        this.baseDensity = baseDensity;
+        this.config = config;
         this.baseDir = this.getDirFromPrompt();
 
         if (this.baseDir == null) {
@@ -30,9 +30,10 @@ com.geertwille = {
             return;
         }
 
-        if (this.baseDensity == 0) {
-            this.baseDensity = this.getDensityScaleFromPrompt();
+        if (this.config['density-scale'] == undefined) {
+            this.config = this.showSettingsDialog();
         }
+        this.baseDensity = this.config['density-scale'];
 
         // Hide all layers except the ones we are slicing
         for (var i = 0; i < [selection count]; i++) {
@@ -113,25 +114,36 @@ com.geertwille = {
         }
     },
 
-    //Let the user select design density
-    getDensityScaleFromPrompt: function() {
+    showSettingsDialog: function() {
         var folders       = helpers.readPluginPath(),
-            accessory     = [[NSComboBox alloc] initWithFrame:NSMakeRect(0, 0, 200, 25)],
-            alert         = [[NSAlert alloc] init],
-            responseCode
+            settingsInput     = COSAlertWindow.new(),
+            densityScales     = ['@1x', '@2x', '@3x'],
+            densityScale,
+            askForPrefix,
+            settings
         ;
-        [accessory addItemsWithObjectValues:['@1x', '@2x', '@3x']];
-        [accessory selectItemAtIndex: 0];
 
-        [alert setMessageText:'Select screen density'];
-        [alert addButtonWithTitle:'OK'];
-        [alert setAccessoryView:accessory];
+        // Load previous settings
+        settings = this.readConfig();
+        densityScale = [settings valueForKey:@"density-scale"];
+        askForPrefix = [settings valueForKey:@"ask-for-prefix"];
 
-        responseCode = [alert runModal];
-        var densityScale = [accessory indexOfSelectedItem] + 1;
-        helpers.saveJsonToFile([NSDictionary dictionaryWithObjectsAndKeys:densityScale, @"density-scale", nil], folders.sketchPluginsPath + folders.pluginFolder + '/config.json');
+        [settingsInput setMessageText:@'Change settings'];
+        [settingsInput addAccessoryView: helpers.createSelect(densityScales, densityScale)];
+        [settingsInput addAccessoryView: helpers.createCheckbox({name:'Ask for prefix on export', value:'1'}, askForPrefix)];
 
-        return densityScale;
+        [settingsInput addButtonWithTitle:@'Save'];
+        [settingsInput addButtonWithTitle:@'Cancel'];
+
+        var responseCode = settingsInput.runModal();
+
+        if (1000 == responseCode ) {
+            // +1 because 0 means @1x
+            densityScale = [[settingsInput viewAtIndex:0] indexOfSelectedItem] + 1;
+            helpers.saveJsonToFile([NSDictionary dictionaryWithObjectsAndKeys:densityScale, @"density-scale", [[settingsInput viewAtIndex:1] state], @"ask-for-prefix", nil], folders.sketchPluginsPath + folders.pluginFolder + '/config.json');
+        }
+
+        return this.readConfig();
     },
 
     processSlice: function(slice) {
@@ -144,7 +156,7 @@ com.geertwille = {
 
         for (var i = 0; i < this.factors.length; i++) {
             var fileName = '',
-                name     = this.factors[i].folder,
+                name     = this.factors[i].folder ? '/' + this.factors[i].folder : '',
                 factor   = this.factors[i].scale,
                 prefix   = '',
                 suffix   = '',
@@ -165,9 +177,9 @@ com.geertwille = {
 
             // If we place the assets in the res folder don't place it in an assets/android folder
             if (this.baseDir.indexOf('/res') > -1 && this.type == "android") {
-                fileName = this.baseDir + "/" + name + "/" + prefix + sliceName + suffix + ".png";
+                fileName = this.baseDir + name + "/" + prefix + sliceName + suffix + ".png";
             } else {
-                fileName = this.baseDir + "/assets/" + this.type + "/" + name + "/" + prefix+ sliceName + suffix + ".png";
+                fileName = this.baseDir + "/assets/" + this.type + name + "/" + prefix + sliceName + suffix + ".png";
             }
 
             [(com.geertwille.document) saveArtboardOrSlice: version toFile:fileName];
@@ -204,9 +216,5 @@ com.geertwille = {
     readConfig: function() {
         var folders = helpers.readPluginPath();
         return helpers.jsonFromFile(folders.sketchPluginsPath + folders.pluginFolder + '/config.json', true);
-    },
-
-    updateBaseDensity: function() {
-        this.getDensityScaleFromPrompt();
     }
 }

@@ -6,6 +6,17 @@ var document;
 var onRun = function(context) {
     var selection = context.selection,
         document = context.document,
+        config,
+        prefix,
+        factors
+    ;
+
+    var home_folder = "/Users/" + NSUserName();
+    new AppSandbox().authorize(home_folder, function() {
+        com.geertwille.context = context;
+        com.geertwille.document = document;
+        config = com.geertwille.readConfig();
+
         factors = [
             {
                 folder: '',
@@ -22,15 +33,9 @@ var onRun = function(context) {
                 scale: 2.4,
                 suffix: '.scale-240',
             },
-        ]
-    ;
-
-    var home_folder = "/Users/" + NSUserName();
-    new AppSandbox().authorize(home_folder, function() {
-        com.geertwille.context = context;
-        com.geertwille.document = document;
+        ];
 
         var config = com.geertwille.readConfig();
-        com.geertwille.export('winrt', factors, document, selection, config['density-scale']);
+        com.geertwille.export('winrt', factors, document, selection, config);
     });
 }

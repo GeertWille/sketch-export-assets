@@ -11,7 +11,7 @@ var onRun = function(context) {
     new AppSandbox().authorize(home_folder, function() {
         com.geertwille.context = context;
         com.geertwille.document = document;
-        com.geertwille.updateBaseDensity();
+        com.geertwille.showSettingsDialog();
     });
 };
 

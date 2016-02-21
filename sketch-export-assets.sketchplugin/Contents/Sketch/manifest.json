@@ -3,7 +3,7 @@
     "description": "Plugins to export assets to different platforms",
     "author": "Geert Wille",
     "homepage": "https://github.com/GeertWille/sketch-export-assets",
-    "version": 2.2,
+    "version": 2.3,
     "identifier": "com.geertwille.sketch.export-assets",
     "compatibleVersion": 3,
     "bundleVersion": 1,
@@ -28,16 +28,16 @@
                 "script": "Export WindowsPhone Assets.sketchscript"
             },
             {
-                "name": "Change Base Density",
-                "identifier": "change-base-density",
-                "shortcut": "ctrl alt shift 4",
-                "script": "Change Base Density.sketchscript"
-            },
-            {
                 "name": "Export WindowsPhone 8.1 (WinRT) Assets",
                 "identifier": "export-assets-winrt",
-                "shortcut": "ctrl alt shift 5",
+                "shortcut": "ctrl alt shift 4",
                 "script": "Export WinRT Assets.sketchscript"
+            },
+            {
+                "name": "Change Settings",
+                "identifier": "change-settings",
+                "shortcut": "ctrl alt shift 5",
+                "script": "Change Settings.sketchscript"
             }
         ],
     "menu":
@@ -47,8 +47,8 @@
                 "export-assets-android",
                 "export-assets-ios",
                 "export-assets-wp",
-                "change-base-density",
-                "export-assets-winrt"
+                "export-assets-winrt",
+                "change-settings"
             ]
         }
 }

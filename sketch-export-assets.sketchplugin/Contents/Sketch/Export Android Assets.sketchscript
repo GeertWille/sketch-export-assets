@@ -6,7 +6,21 @@ var document;
 var onRun = function(context) {
     var selection = context.selection,
         document = context.document,
-        prefix = [document askForUserInput:'Enter a prefix (like launcher, menu, dialog, etc):' initialValue:''],
+        config,
+        prefix,
+        factors
+    ;
+
+    var home_folder = "/Users/" + NSUserName();
+    new AppSandbox().authorize(home_folder, function() {
+        com.geertwille.context = context;
+        com.geertwille.document = document;
+        config = com.geertwille.readConfig();
+
+        if (config['ask-for-prefix'] == true) {
+            prefix = [document askForUserInput:'Enter a prefix (like launcher, menu, dialog, etc):' initialValue:''];
+        }
+
         factors = [
             {
                 folder: 'drawable-mdpi',
@@ -38,19 +52,12 @@ var onRun = function(context) {
                 prefix: prefix,
                 suffix: '',
             },
-        ]
-    ;
+        ];
 
-    if (prefix != '') {
-        prefix += '_';
-    }
+        if (prefix != '') {
+            prefix += '_';
+        }
 
-    var home_folder = "/Users/" + NSUserName();
-    new AppSandbox().authorize(home_folder, function() {
-        com.geertwille.context = context;
-        com.geertwille.document = document;
-
-        var config = com.geertwille.readConfig();
-        com.geertwille.export('android', factors, document, selection, config['density-scale']);
+        com.geertwille.export('android', factors, document, selection, config);
     });
 }
