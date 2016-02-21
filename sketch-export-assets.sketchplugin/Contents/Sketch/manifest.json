@@ -34,9 +34,15 @@
                 "script": "Export WinRT Assets.sketchscript"
             },
             {
+                "name": "Export Android MIPMAP Assets",
+                "identifier": "export-assets-android-mipmap",
+                "shortcut": "ctrl alt shift 5",
+                "script": "Export Android MIPMAP Assets.sketchscript"
+            },
+            {
                 "name": "Change Settings",
                 "identifier": "change-settings",
-                "shortcut": "ctrl alt shift 5",
+                "shortcut": "ctrl alt shift 6",
                 "script": "Change Settings.sketchscript"
             }
         ],
@@ -48,6 +54,7 @@
                 "export-assets-ios",
                 "export-assets-wp",
                 "export-assets-winrt",
+                "export-assets-android-mipmap",
                 "change-settings"
             ]
         }

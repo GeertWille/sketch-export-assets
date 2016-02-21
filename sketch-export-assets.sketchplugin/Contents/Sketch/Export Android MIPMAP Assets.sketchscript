@@ -1,0 +1,51 @@
+// Developer: Wouter Horre
+// Merged assets generation for Android, windows phone and iOS devices
+@import 'library/common.js'
+
+var document;
+var onRun = function(context) {
+    var selection = context.selection,
+        document = context.document,
+        config,
+        prefix,
+        factors
+    ;
+
+    var home_folder = "/Users/" + NSUserName();
+    new AppSandbox().authorize(home_folder, function() {
+        com.geertwille.context = context;
+        com.geertwille.document = document;
+        config = com.geertwille.readConfig();
+
+        factors = [
+            {
+                folder: 'mipmap-mdpi',
+                scale: 1.0,
+                suffix: '',
+            },
+            {
+                folder: 'mipmap-hdpi',
+                scale: 1.5,
+                suffix: '',
+            },
+            {
+                folder: 'mipmap-xhdpi',
+                scale: 2.0,
+                suffix: '',
+            },
+            {
+                folder: 'mipmap-xxhdpi',
+                scale: 3.0,
+                suffix: '',
+            },
+            {
+                folder: 'mipmap-xxxhdpi',
+                scale: 4.0,
+                suffix: '',
+            },
+        ];
+
+        var config = com.geertwille.readConfig();
+        com.geertwille.export('android', factors, document, selection, config);
+    });
+}
