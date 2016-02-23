@@ -6,6 +6,9 @@ Also check [my new sketch plugin] to export assets for iOS directly from Sketch 
 
 [my new sketch plugin]:https://github.com/GeertWille/sketch-to-xcode-assets-catalog
 
+##### Please donate any value to keep this project alive
+<a href='https://pledgie.com/campaigns/31173'><img alt='Click here to lend your support to: Sketch plugin research and development funding and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/31173.png?skin_name=chrome' border='0' ></a>
+
 ## Installation
 
 The actual location of your Sketch plugins directory will vary. To open it just click on the `Reveal Plugins Folder` under the `Plugins` menu in sketch.
