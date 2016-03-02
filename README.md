@@ -6,7 +6,7 @@ Also check [my new sketch plugin] to export assets for iOS directly from Sketch 
 
 [my new sketch plugin]:https://github.com/GeertWille/sketch-to-xcode-assets-catalog
 
-##### Please donate any value to keep this project alive
+##### Please donate any amount to keep this project alive
 <a href='https://pledgie.com/campaigns/31173'><img alt='Click here to lend your support to: Sketch plugin research and development funding and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/31173.png?skin_name=chrome' border='0' ></a>
 
 ## Installation
@@ -23,11 +23,8 @@ Use [Sketch Toolbox]
 
 Once you have checked out the plugin repository into the relevant directory, you'll find the plugin functions under the Plugins menu in Sketch.
 
-## Assumptions
-
-~~The plugin assumes you design your layouts in mdpi, which means 1px = 1dp~~
-
-From now on this is configurable!
+## Configure
+  - Base density
 
 ## Shortcuts
 
