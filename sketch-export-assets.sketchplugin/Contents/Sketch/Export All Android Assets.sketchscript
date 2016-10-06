@@ -1,0 +1,73 @@
+// Developer: Geert Wille
+// Merged assets generation for Android, windows phone and iOS devices
+@import 'library/common.js'
+
+var document;
+var onRun = function(context) {
+    var home_folder = "/Users/" + NSUserName();
+    new AppSandbox().authorize(home_folder, function() {
+        var document = context.document,
+            config,
+            prefix,
+            factors
+        ;
+
+        com.geertwille.context = context;
+        com.geertwille.document = document;
+        config = com.geertwille.readConfig();
+
+        if (config['ask-for-prefix'] == true) {
+            prefix = [document askForUserInput:'Enter a prefix (like launcher, menu, dialog, etc):' initialValue:''];
+        }
+
+        factors = [
+            {
+                folder: 'drawable-mdpi',
+                scale: 1.0,
+                prefix: prefix,
+                suffix: '',
+            },
+            {
+                folder: 'drawable-hdpi',
+                scale: 1.5,
+                prefix: prefix,
+                suffix: '',
+            },
+            {
+                folder: 'drawable-xhdpi',
+                scale: 2.0,
+                prefix: prefix,
+                suffix: '',
+            },
+            {
+                folder: 'drawable-xxhdpi',
+                scale: 3.0,
+                prefix: prefix,
+                suffix: '',
+            },
+            {
+                folder: 'drawable-xxxhdpi',
+                scale: 4.0,
+                prefix: prefix,
+                suffix: '',
+            },
+        ];
+
+        if (prefix != '') {
+            prefix += '_';
+        }
+
+        var originalSelection = document.selectedLayers();
+        document.setSelectedLayers(document.allExportableLayers());
+
+        var selection = document.selectedLayers();
+        if (selection == null || [selection count] == 0) {
+            com.geertwille.alert("No exportable layers found.");
+        }
+        else {
+            com.geertwille.export('android', factors, document, selection, config);
+        }
+
+        document.setSelectedLayers(originalSelection);
+    });
+}
