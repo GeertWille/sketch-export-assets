@@ -17,16 +17,16 @@ com.geertwille = {
         this.document = document;
         this.selection = selection;
         this.config = config;
-        this.baseDir = this.getDirFromPrompt();
-
-        if (this.baseDir == null) {
-            this.alert("Not saving any assets");
-            return;
-        }
 
         // If nothing is selected tell the user so
         if ([selection count] == 0) {
-            this.document.showMessage('Please select one or more layers to export.')
+            this.alert("Please select one or more exportable layers to export (or use an Export All command).");
+            return;
+        }
+
+        this.baseDir = this.getDirFromPrompt();
+        if (this.baseDir == null) {
+            this.alert("Not saving any assets");
             return;
         }
 
@@ -161,7 +161,13 @@ com.geertwille = {
             }
         }
 
-        slice = [MSExportRequest requestWithRect:rect scale:(factor / this.baseDensity)];
+        var slices = [MSExportRequest exportRequestsFromExportableLayer:layer inRect:rect useIDForName:false];
+        var slice = null;
+        if (slices.count() > 0) {
+            slice = slices[0];
+            slice.scale = (factor / this.baseDensity)
+        }
+
         if (!useSliceLayer) {
             slice.shouldTrim = true;
         }

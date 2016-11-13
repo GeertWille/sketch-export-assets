@@ -10,39 +10,51 @@
     "commands":
         [
             {
+                "name": "Export All iOS Assets",
+                "identifier": "export-all-assets-ios",
+                "shortcut": "ctrl alt shift 1",
+                "script": "Export All iOS Assets.sketchscript"
+            },
+            {
+                "name": "Export All Android Assets",
+                "identifier": "export-all-assets-android",
+                "shortcut": "ctrl alt shift 2",
+                "script": "Export All Android Assets.sketchscript"
+            },
+            {
                 "name": "Export iOS Assets",
                 "identifier": "export-assets-ios",
-                "shortcut": "ctrl alt shift 1",
+                "shortcut": "ctrl alt shift 3",
                 "script": "Export iOS Assets.sketchscript"
             },
             {
                 "name": "Export Android Assets",
                 "identifier": "export-assets-android",
-                "shortcut": "ctrl alt shift 2",
+                "shortcut": "ctrl alt shift 4",
                 "script": "Export Android Assets.sketchscript"
             },
             {
                 "name": "Export WindowsPhone Assets",
                 "identifier": "export-assets-wp",
-                "shortcut": "ctrl alt shift 3",
+                "shortcut": "ctrl alt shift 5",
                 "script": "Export WindowsPhone Assets.sketchscript"
             },
             {
                 "name": "Export WindowsPhone 8.1 (WinRT) Assets",
                 "identifier": "export-assets-winrt",
-                "shortcut": "ctrl alt shift 4",
+                "shortcut": "ctrl alt shift 6",
                 "script": "Export WinRT Assets.sketchscript"
             },
             {
                 "name": "Export Android MIPMAP Assets",
                 "identifier": "export-assets-android-mipmap",
-                "shortcut": "ctrl alt shift 5",
+                "shortcut": "ctrl alt shift 7",
                 "script": "Export Android MIPMAP Assets.sketchscript"
             },
             {
                 "name": "Change Settings",
                 "identifier": "change-settings",
-                "shortcut": "ctrl alt shift 6",
+                "shortcut": "ctrl alt shift 8",
                 "script": "Change Settings.sketchscript"
             }
         ],
@@ -50,8 +62,10 @@
         {
             "items":
             [
-                "export-assets-android",
+                "export-all-assets-ios",
+                "export-all-assets-android",
                 "export-assets-ios",
+                "export-assets-android",
                 "export-assets-wp",
                 "export-assets-winrt",
                 "export-assets-android-mipmap",

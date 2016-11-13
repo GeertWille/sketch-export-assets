@@ -4,15 +4,14 @@
 
 var document;
 var onRun = function(context) {
-    var selection = context.selection,
-        document = context.document,
-        config,
-        prefix,
-        factors
-    ;
-
     var home_folder = "/Users/" + NSUserName();
     new AppSandbox().authorize(home_folder, function() {
+        var document = context.document,
+            config,
+            prefix,
+            factors
+        ;
+
         com.geertwille.context = context;
         com.geertwille.document = document;
         config = com.geertwille.readConfig();
@@ -58,6 +57,17 @@ var onRun = function(context) {
             prefix += '_';
         }
 
-        com.geertwille.export('android', factors, document, selection, config);
+        var originalSelection = document.selectedLayers();
+        document.setSelectedLayers(document.allExportableLayers());
+
+        var selection = document.selectedLayers();
+        if (selection == null || [selection count] == 0) {
+            com.geertwille.alert("No exportable layers found.");
+        }
+        else {
+            com.geertwille.export('android', factors, document, selection, config);
+        }
+
+        document.setSelectedLayers(originalSelection);
     });
 }
