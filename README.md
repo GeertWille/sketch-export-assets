@@ -2,7 +2,7 @@
 
 Export assets for Android, iOS, Windows Phone in Sketch.
 
-Also check [my new sketch plugin] to export assets for iOS directly from Sketch into Xcodes assets catalog.
+###[Sign up for an improved version of this plugin]
 
 [Sign up for an improved version of this plugin]:http://sketchexporter.co/
 
