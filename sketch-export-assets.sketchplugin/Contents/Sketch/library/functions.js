@@ -69,7 +69,19 @@ var openInFinder = function(path) {
     [finderTask launch];
 }
 
-var createCheckbox = function(item, flag) {
+var createPrefixCheckbox = function(item, flag) {
+    flag = ( flag == false ) ? NSOffState : NSOnState;
+    var checkbox = [[NSButton alloc] initWithFrame: NSMakeRect(0, 0, 300, 25)];
+    [checkbox setButtonType: NSSwitchButton];
+    [checkbox setBezelStyle: 0];
+    [checkbox setTitle: item.name];
+    [checkbox setTag: item.value];
+    [checkbox setState: flag];
+
+    return checkbox;
+}
+
+var createOpenCheckbox = function(item, flag) {
     flag = ( flag == false ) ? NSOffState : NSOnState;
     var checkbox = [[NSButton alloc] initWithFrame: NSMakeRect(0, 0, 300, 25)];
     [checkbox setButtonType: NSSwitchButton];
@@ -100,5 +112,6 @@ var helpers = {
     readPluginPath: readPluginPath,
     openInFinder: openInFinder,
     createSelect: createSelect,
-    createCheckbox: createCheckbox
+    createPrefixCheckbox: createPrefixCheckbox,
+    createOpenCheckbox: createOpenCheckbox
 }
