@@ -158,34 +158,42 @@ com.geertwille = {
     },
 
     makeSliceAndResizeWithFactor: function(layer, factor) {
-        var loopLayerChildren = [[layer children] objectEnumerator],
-            rect = [MSSliceTrimming trimmedRectForSlice:layer],
-            useSliceLayer = false,
-            slice
-        ;
+        // var loopLayerChildren = [[layer children] objectEnumerator],
+        //     rect = [MSSliceTrimming trimmedRectForSlice:layer],
+        //     useSliceLayer = false,
+        //     slice
+        // ;
 
-        // Check for MSSliceLayer and overwrite the rect if present
-        while (layerChild = [loopLayerChildren nextObject]) {
-            if ([layerChild class] == 'MSSliceLayer') {
-                rect  = [MSSliceTrimming trimmedRectForSlice:layerChild];
-                useSliceLayer = true;
-            }
-        }
+        // // Check for MSSliceLayer and overwrite the rect if present
+        // while (layerChild = [loopLayerChildren nextObject]) {
+        //     if ([layerChild class] == 'MSSliceLayer') {
+        //         rect  = [MSSliceTrimming trimmedRectForSlice:layerChild];
+        //         useSliceLayer = true;
+        //     }
+        // }
 
-        var slices = [MSExportRequest exportRequestsFromExportableLayer:layer inRect:rect useIDForName:false];
-        var slice = null;
-        if (slices.count() > 0) {
-            slice = slices[0];
-            slice.scale = (factor / this.baseDensity)
-        }
+        // var slices = [MSExportRequest exportRequestsFromExportableLayer:layer inRect:rect useIDForName:false];
+        // var slice = null;
+        // if (slices.count() > 0) {
+        //     slice = slices[0];
+        //     slice.scale = (factor / this.baseDensity)
+        // }
 
-        if (!useSliceLayer) {
-            slice.shouldTrim = true;
-        }
-        // slice.saveForWeb = true;
-        // slice.compression = 0;
-        // slice.includeArtboardBackground = false;
-        return slice;
+        // if (!useSliceLayer) {
+        //     slice.shouldTrim = true;
+        // }
+        // // slice.saveForWeb = true;
+        // // slice.compression = 0;
+        // // slice.includeArtboardBackground = false;
+        // return slice;
+
+        var copy = [layer duplicate];
+        var rect = copy.className() == "MSArtboardGroup" ? rect = copy.absoluteRect().rect() : copy.absoluteInfluenceRect()
+        var request = MSExportRequest.new();
+        request.rect = rect;
+        request.scale = factor;
+        [copy removeFromParent];
+        return request;
     },
 
     readConfig: function() {
