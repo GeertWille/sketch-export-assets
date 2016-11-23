@@ -159,7 +159,8 @@ com.geertwille = {
 
     makeSliceAndResizeWithFactor: function(layer, factor) {
         var loopLayerChildren = [[layer children] objectEnumerator],
-            rect = [MSSliceTrimming trimmedRectForSlice:layer],
+            sliceLayerAncestry = [MSImmutableLayerAncestry ancestryWithMSLayer:layer];
+            rect = [MSSliceTrimming trimmedRectForLayerAncestry:sliceLayerAncestry];
             useSliceLayer = false,
             slice
         ;
@@ -167,7 +168,8 @@ com.geertwille = {
         // Check for MSSliceLayer and overwrite the rect if present
         while (layerChild = [loopLayerChildren nextObject]) {
             if ([layerChild class] == 'MSSliceLayer') {
-                rect  = [MSSliceTrimming trimmedRectForSlice:layerChild];
+                sliceLayerAncestry = [MSImmutableLayerAncestry ancestryWithMSLayer:layerChild];
+                rect = [MSSliceTrimming trimmedRectForLayerAncestry:sliceLayerAncestry];
                 useSliceLayer = true;
             }
         }

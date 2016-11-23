@@ -6,6 +6,8 @@ Export assets for Android, iOS, Windows Phone in Sketch.
 
 [Sign up for an improved version of this plugin]:http://sketchexporter.co/
 
+<a href='https://pledgie.com/campaigns/31173'><img alt='Click here to lend your support to: Sketch plugin research and development funding and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/31173.png?skin_name=chrome' border='0' ></a>
+
 ## Installation
 
 The actual location of your Sketch plugins directory will vary. To open it just click on the `Reveal Plugins Folder` under the `Plugins` menu in sketch.
