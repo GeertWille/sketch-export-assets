@@ -178,7 +178,7 @@ com.geertwille = {
         var slice = null;
         if (slices.count() > 0) {
             slice = slices[0];
-            slice.scale = (factor / this.baseDensity)
+            slice.scale = (factor / (this.baseDensity + 1))
         }
 
         if (!useSliceLayer) {
