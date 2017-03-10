@@ -19,6 +19,11 @@ var onRun = function(context) {
 
         factors = [
             {
+                folder: 'mipmap-ldpi',
+                scale: 0.75,
+                suffix: '',
+            },
+            {
                 folder: 'mipmap-mdpi',
                 scale: 1.0,
                 suffix: '',

@@ -22,6 +22,12 @@ var onRun = function(context) {
 
         factors = [
             {
+                folder: 'drawable-ldpi',
+                scale: 0.75,
+                prefix: prefix,
+                suffix: '',
+            },
+            {
                 folder: 'drawable-mdpi',
                 scale: 1.0,
                 prefix: prefix,
